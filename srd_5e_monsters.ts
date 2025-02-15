@@ -240,7 +240,7 @@ export function changeProperties(input: IInput): IEntity {
 			}
 
 			case 'Skills': {
-				console.log('🦕 Skills', val)
+				// console.log('🦕 Skills', val)
 				val.toLowerCase().split(',').forEach((strSkill: string) => {
 					const skillVal = strSkill.trim().split(' ').at(-1)
 					// @ts-ignore

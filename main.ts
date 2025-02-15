@@ -17,6 +17,17 @@ export function countUniqueKeys(
 
 // Learn more at https://docs.deno.com/runtime/manual/examples/module_metadata#concepts
 if (import.meta.main) {
-	const result = data.map((row, idx) => idx > 10 ? changeProperties(row) : row)
+	const result = data.map(row => changeProperties(row))
 	console.log('🦕 result', result[0])
+
+	const [isBuild] = Deno.args
+	if (isBuild === 'build') {
+		try {
+			console.log('%c🦕 try generate output.json file', 'color: yellow;')
+			await Deno.writeTextFile(`output-${Date.now()}.json`, JSON.stringify(result));
+			console.log('%c✅ success', 'color: green;')
+	} catch(e) {
+			console.error(e);
+		}
+	}
 }
